@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Filial San Miguel - Boca Juniors</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background-color: #081f5c;
+      color: white;
+    }
+    header {
+      position: relative;
+      height: 300px;
+      background-image: url('portada.jpeg');
+      background-size: cover;
+      background-position: center;
+    }
+    header::after {
+      content: "";
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background-color: rgba(0, 0, 0, 0.5);
+    }
+    header h1 {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      color: #FFD700;
+      font-size: 2.5rem;
+      text-align: center;
+    }
+    nav {
+      background-color: #0e2a6d;
+      padding: 10px 0;
+      text-align: center;
+    }
+    nav a {
+      color: #FFD700;
+      margin: 0 15px;
+      text-decoration: none;
+      font-weight: bold;
+    }
+    nav a:hover {
+      color: #ffdd55;
+    }
+    section {
+      padding: 20px;
+    }
+    .historia h2 {
+      color: #FFD700;
+    }
+    .publicidad {
+      display: grid;
+      gap: 20px;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      padding: 20px;
+    }
+    .ad-card {
+      background: white;
+      color: black;
+      padding: 20px;
+      border-radius: 10px;
+      text-align: center;
+    }
+    .footer {
+      background-color: #0e2a6d;
+      color: #FFD700;
+      text-align: center;
+      padding: 15px;
+      margin-top: 30px;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>Filial San Miguel - Boca Juniors</h1>
+  </header>
+
+  <nav>
+    <a href="#historia">Nuestra Historia</a>
+    <a href="#noticias">Noticias</a>
+    <a href="#contacto">Contacto</a>
+  </nav>
+
+  <section id="historia" class="historia">
+    <h2>Nuestra Historia</h2>
+    <p>Somos la filial de San Miguel, fundada en ...</p>
+  </section>
+
+  <section class="publicidad">
+    <div class="ad-card">
+      <strong>Espacio publicitario disponible</strong>
+      <p>Tu marca puede estar aquí</p>
+    </div>
+    <div class="ad-card">
+      <strong>Espacio publicitario disponible</strong>
+      <p>Anuncie con nosotros</p>
+    </div>
+  </section>
+
+  <footer class="footer">
+    © 2025 Filial San Miguel - Boca Juniors. Todos los derechos reservados.
+  </footer>
+
+</body>
+</html>
