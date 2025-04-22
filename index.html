@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Filial Boca Juniors San Miguel</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #001f57;
+      color: white;
+    }
+    header {
+      background-color: #03256c;
+      text-align: center;
+      padding: 20px 0;
+    }
+    nav a {
+      color: #FFD700;
+      margin: 0 15px;
+      text-decoration: none;
+      font-weight: bold;
+    }
+    footer {
+      background-color: #03256c;
+      text-align: center;
+      padding: 1rem;
+    }
+    button {
+      background-color: #FFD700;
+      color: #081f5c;
+      border: none;
+      padding: 10px 20px;
+      cursor: pointer;
+    }
+    .hidden {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <img src="portada.jpeg" alt="Filial Boca Juniors San Miguel" style="width:100%; max-height:300px;">
+    <h1 style="color:#FFD700;">Bienvenidos a la Filial Boca Juniors San Miguel</h1>
+  </header>
+
+  <nav>
+    <a href="#historia">Nuestra Historia</a>
+    <a href="#calendario">Calendario</a>
+    <a href="#trivia">Trivia</a>
+    <a href="https://www.instagram.com/filialsanmiguel?igsh=MWQ5cDh6bDAxM2lmaQ==" target="_blank" style="color:#FFD700;">Instagram</a>
+  </nav>
+
+  <section id="historia">
+    <h2 style="color:#FFD700;">Nuestra Historia</h2>
+    <p>Somos la filial de San Miguel, fundada en ...</p>
+  </section>
+
+  <section id="calendario">
+    <h2 style="color:#FFD700;">Próximos Partidos</h2>
+    <div id="partidos"></div>
+  </section>
+
+  <section id="trivia">
+    <h2 style="color:#FFD700;">Trivia Boca Juniors</h2>
+
+    <div id="formularioDatos">
+      <p><strong>Por favor, ingresa tus datos para participar:</strong></p>
+
+      <form id="datosForm">
+        <p><strong>Tu nombre:</strong></p>
+        <input type="text" id="nombre" name="nombre" required><br>
+
+        <p><strong>Tu apellido:</strong></p>
+        <input type="text" id="apellido" name="apellido" required><br>
+
+        <p><strong>Tu teléfono:</strong></p>
+        <input type="tel" id="telefono" name="telefono" pattern="[0-9]{10}" required><br>
+
+        <button type="submit">Participar</button>
+      </form>
+    </div>
+
+    <div id="triviaFormContainer" class="hidden">
+      <p><strong>1. ¿Cuántos títulos de liga tiene Boca Juniors?</strong></p>
+      <label>
+        <input type="radio" name="pregunta1" value="A"> A) 34
+      </label><br>
+      <label>
+        <input type="radio" name="pregunta1" value="B"> B) 27
+      </label><br>
+      <label>
+        <input type="radio" name="pregunta1" value="C"> C) 40
+      </label><br>
+
+      <p><strong>2. ¿En qué año fue fundada la institución?</strong></p>
+      <label>
+        <input type="radio" name="pregunta2" value="A"> A) 1905
+      </label><br>
+      <label>
+        <input type="radio" name="pregunta2" value="B"> B) 1920
+      </label><br>
+      <label>
+        <input type="radio" name="pregunta2" value="C"> C) 1935
+      </label><br>
+
+      <button type="submit">Enviar respuestas</button>
+    </div>
+
+    <div id="resultado"></div>
+  </section>
+
+  <footer>
+    <p>Seguinos en redes:</p>
+    <a href="https://www.instagram.com/filialsanmiguel?igsh=MWQ5cDh6bDAxM2lmaQ==" target="_blank" style="color:#FFD700; font-weight:bold; text-decoration:none;">📷 Instagram - @filialsanmiguel</a>
+  </footer>
+
+  <script>
+    const registrados = JSON.parse(localStorage.getItem('registros') || '[]');
+
+    function telefonoRegistrado(telefono) {
+      return registrados.some(participante => participante.telefono === telefono);
+    }
+
+    document.getElementById('datosForm').addEventListener('submit', function(event) {
+      event.preventDefault();
+
+      const nombre = document.getElementById('nombre').value;
+      const apellido = document.getElementById('apellido').value;
+      const telefono = document.getElementById('telefono').value;
+
+      if (telefonoRegistrado(telefono)) {
+        document.getElementById('resultado').innerHTML = "<p style='color:red;'>Este teléfono ya participó. No puedes volver a jugar.</p>";
+        return;
+      }
+
+      document.getElementById('formularioDatos').style.display = 'none';
+      document.getElementById('triviaFormContainer').style.display = 'block';
+    });
+
+    document.getElementById('triviaFormContainer').addEventListener('submit', function(event) {
+      event.preventDefault();
+
+      const telefono = document.getElementById('telefono').value;
+      const pregunta1 = document.querySelector('input[name="pregunta1"]:checked')?.value;
+      const pregunta2 = document.querySelector('input[name="pregunta2"]:checked')?.value;
+
+      if (!pregunta1 || !pregunta2) {
+        document.getElementById('resultado').innerHTML = "<p style='color:red;'>Por favor, responde todas las preguntas.</p>";
+        return;
+      }
+
+      const datos = {
+        nombre: document.getElementById('nombre').value,
+        apellido: document.getElementById('apellido').value,
+        telefono: telefono,
+        respuesta1: pregunta1,
+        respuesta2: pregunta2
+      };
+
+      registrados.push(datos);
+      localStorage.setItem('registros', JSON.stringify(registrados));
+
+      document.getElementById('resultado').innerHTML = `
+        <p>¡Gracias por participar, ${datos.nombre}!</p>
+        <p>Hemos recibido tus respuestas. ¡Suerte en el sorteo!</p>
+      `;
+
+      document.getElementById('triviaFormContainer').style.display = 'none';
+      document.getElementById('formularioDatos').style.display = 'block';
+      document.getElementById('datosForm').reset();
+    });
+
+    // Cargar partidos desde una API (opcional, puedes personalizar esto)
+    const partidosDiv = document.getElementById('partidos');
+    partidosDiv.innerHTML = `
+      <p>Próximos partidos:</p>
+      <ul>
+        <li>Boca Juniors vs. Rival - Fecha: 25/04/2025 - Hora: 21:00</li>
+        <li>Boca Juniors vs. Otro Rival - Fecha: 30/04/2025 - Hora: 18:00</li>
+      </ul>
+    `;
+  </script>
+
+</body>
+</html>
