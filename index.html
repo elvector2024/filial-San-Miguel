@@ -1,42 +1,19 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Filial San Miguel - Boca Juniors</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Filial Boca Juniors San Miguel</title>
   <style>
     body {
-      margin: 0;
       font-family: Arial, sans-serif;
-      background-color: #081f5c;
+      background-color: #001f57;
       color: white;
     }
     header {
-      position: relative;
-      height: 300px;
-      background-image: url('portada.jpeg');
-      background-size: cover;
-      background-position: center;
-    }
-    header::after {
-      content: "";
-      position: absolute;
-      top: 0; left: 0; right: 0; bottom: 0;
-      background-color: rgba(0, 0, 0, 0.5);
-    }
-    header h1 {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      color: #FFD700;
-      font-size: 2.5rem;
+      background-color: #03256c;
       text-align: center;
-    }
-    nav {
-      background-color: #0e2a6d;
-      padding: 10px 0;
-      text-align: center;
+      padding: 20px 0;
     }
     nav a {
       color: #FFD700;
@@ -44,68 +21,167 @@
       text-decoration: none;
       font-weight: bold;
     }
-    nav a:hover {
-      color: #ffdd55;
-    }
-    section {
-      padding: 20px;
-    }
-    .historia h2 {
-      color: #FFD700;
-    }
-    .publicidad {
-      display: grid;
-      gap: 20px;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      padding: 20px;
-    }
-    .ad-card {
-      background: white;
-      color: black;
-      padding: 20px;
-      border-radius: 10px;
+    footer {
+      background-color: #03256c;
       text-align: center;
+      padding: 1rem;
     }
-    .footer {
-      background-color: #0e2a6d;
-      color: #FFD700;
-      text-align: center;
-      padding: 15px;
-      margin-top: 30px;
+    button {
+      background-color: #FFD700;
+      color: #081f5c;
+      border: none;
+      padding: 10px 20px;
+      cursor: pointer;
+    }
+    .hidden {
+      display: none;
     }
   </style>
 </head>
 <body>
 
   <header>
-    <h1>Filial San Miguel - Boca Juniors</h1>
+    <img src="portada.jpeg" alt="Filial Boca Juniors San Miguel" style="width:100%; max-height:300px;">
+    <h1 style="color:#FFD700;">Bienvenidos a la Filial Boca Juniors San Miguel</h1>
   </header>
 
   <nav>
     <a href="#historia">Nuestra Historia</a>
-    <a href="#noticias">Noticias</a>
-    <a href="#contacto">Contacto</a>
+    <a href="#calendario">Calendario</a>
+    <a href="#trivia">Trivia</a>
+    <a href="https://www.instagram.com/filialsanmiguel?igsh=MWQ5cDh6bDAxM2lmaQ==" target="_blank" style="color:#FFD700;">Instagram</a>
   </nav>
 
-  <section id="historia" class="historia">
-    <h2>Nuestra Historia</h2>
+  <section id="historia">
+    <h2 style="color:#FFD700;">Nuestra Historia</h2>
     <p>Somos la filial de San Miguel, fundada en ...</p>
   </section>
 
-  <section class="publicidad">
-    <div class="ad-card">
-      <strong>Espacio publicitario disponible</strong>
-      <p>Tu marca puede estar aquí</p>
-    </div>
-    <div class="ad-card">
-      <strong>Espacio publicitario disponible</strong>
-      <p>Anuncie con nosotros</p>
-    </div>
+  <section id="calendario">
+    <h2 style="color:#FFD700;">Próximos Partidos</h2>
+    <div id="partidos"></div>
   </section>
 
-  <footer class="footer">
-    © 2025 Filial San Miguel - Boca Juniors. Todos los derechos reservados.
+  <section id="trivia">
+    <h2 style="color:#FFD700;">Trivia Boca Juniors</h2>
+
+    <div id="formularioDatos">
+      <p><strong>Por favor, ingresa tus datos para participar:</strong></p>
+
+      <form id="datosForm">
+        <p><strong>Tu nombre:</strong></p>
+        <input type="text" id="nombre" name="nombre" required><br>
+
+        <p><strong>Tu apellido:</strong></p>
+        <input type="text" id="apellido" name="apellido" required><br>
+
+        <p><strong>Tu teléfono:</strong></p>
+        <input type="tel" id="telefono" name="telefono" pattern="[0-9]{10}" required><br>
+
+        <button type="submit">Participar</button>
+      </form>
+    </div>
+
+    <div id="triviaFormContainer" class="hidden">
+      <p><strong>1. ¿Cuántos títulos de liga tiene Boca Juniors?</strong></p>
+      <label>
+        <input type="radio" name="pregunta1" value="A"> A) 34
+      </label><br>
+      <label>
+        <input type="radio" name="pregunta1" value="B"> B) 27
+      </label><br>
+      <label>
+        <input type="radio" name="pregunta1" value="C"> C) 40
+      </label><br>
+
+      <p><strong>2. ¿En qué año fue fundada la institución?</strong></p>
+      <label>
+        <input type="radio" name="pregunta2" value="A"> A) 1905
+      </label><br>
+      <label>
+        <input type="radio" name="pregunta2" value="B"> B) 1920
+      </label><br>
+      <label>
+        <input type="radio" name="pregunta2" value="C"> C) 1935
+      </label><br>
+
+      <button type="submit">Enviar respuestas</button>
+    </div>
+
+    <div id="resultado"></div>
+  </section>
+
+  <footer>
+    <p>Seguinos en redes:</p>
+    <a href="https://www.instagram.com/filialsanmiguel?igsh=MWQ5cDh6bDAxM2lmaQ==" target="_blank" style="color:#FFD700; font-weight:bold; text-decoration:none;">📷 Instagram - @filialsanmiguel</a>
   </footer>
+
+  <script>
+    const registrados = JSON.parse(localStorage.getItem('registros') || '[]');
+
+    function telefonoRegistrado(telefono) {
+      return registrados.some(participante => participante.telefono === telefono);
+    }
+
+    document.getElementById('datosForm').addEventListener('submit', function(event) {
+      event.preventDefault();
+
+      const nombre = document.getElementById('nombre').value;
+      const apellido = document.getElementById('apellido').value;
+      const telefono = document.getElementById('telefono').value;
+
+      if (telefonoRegistrado(telefono)) {
+        document.getElementById('resultado').innerHTML = "<p style='color:red;'>Este teléfono ya participó. No puedes volver a jugar.</p>";
+        return;
+      }
+
+      document.getElementById('formularioDatos').style.display = 'none';
+      document.getElementById('triviaFormContainer').style.display = 'block';
+    });
+
+    document.getElementById('triviaFormContainer').addEventListener('submit', function(event) {
+      event.preventDefault();
+
+      const telefono = document.getElementById('telefono').value;
+      const pregunta1 = document.querySelector('input[name="pregunta1"]:checked')?.value;
+      const pregunta2 = document.querySelector('input[name="pregunta2"]:checked')?.value;
+
+      if (!pregunta1 || !pregunta2) {
+        document.getElementById('resultado').innerHTML = "<p style='color:red;'>Por favor, responde todas las preguntas.</p>";
+        return;
+      }
+
+      const datos = {
+        nombre: document.getElementById('nombre').value,
+        apellido: document.getElementById('apellido').value,
+        telefono: telefono,
+        respuesta1: pregunta1,
+        respuesta2: pregunta2
+      };
+
+      registrados.push(datos);
+      localStorage.setItem('registros', JSON.stringify(registrados));
+
+      document.getElementById('resultado').innerHTML = `
+        <p>¡Gracias por participar, ${datos.nombre}!</p>
+        <p>Hemos recibido tus respuestas. ¡Suerte en el sorteo!</p>
+      `;
+
+      document.getElementById('triviaFormContainer').style.display = 'none';
+      document.getElementById('formularioDatos').style.display = 'block';
+      document.getElementById('datosForm').reset();
+    });
+
+    // Cargar partidos desde una API (opcional, puedes personalizar esto)
+    const partidosDiv = document.getElementById('partidos');
+    partidosDiv.innerHTML = `
+      <p>Próximos partidos:</p>
+      <ul>
+        <li>Boca Juniors vs. Rival - Fecha: 25/04/2025 - Hora: 21:00</li>
+        <li>Boca Juniors vs. Otro Rival - Fecha: 30/04/2025 - Hora: 18:00</li>
+      </ul>
+    `;
+  </script>
 
 </body>
 </html>
