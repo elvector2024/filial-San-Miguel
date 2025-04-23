@@ -105,7 +105,7 @@
         <input type="radio" name="pregunta2" value="C"> C) 1935
       </label><br>
 
-      <button type="submit">Enviar respuestas</button>
+      <button type="submit" id="submitTrivia">Enviar respuestas</button>
     </div>
 
     <div id="resultado"></div>
@@ -139,7 +139,7 @@
       document.getElementById('triviaFormContainer').style.display = 'block';
     });
 
-    document.getElementById('triviaFormContainer').addEventListener('submit', function(event) {
+    document.getElementById('submitTrivia').addEventListener('click', function(event) {
       event.preventDefault();
 
       const telefono = document.getElementById('telefono').value;
@@ -185,3 +185,4 @@
 
 </body>
 </html>
+
